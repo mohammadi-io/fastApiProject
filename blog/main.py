@@ -20,7 +20,7 @@ def get_db():
 
 @app.post(path='/blog', status_code=status.HTTP_201_CREATED, tags=['Blog'])
 def create_blog(request: schemas.Blog, db: Session = Depends(get_db)):
-    new_bolg = models.Blog(title=request.title, body=request.body)
+    new_bolg = models.Blog(title=request.title, body=request.body, creator_id=request.creator_id)
     db.add(instance=new_bolg)
     db.commit()
     db.refresh(instance=new_bolg)  # refresh attributes on the given instance
