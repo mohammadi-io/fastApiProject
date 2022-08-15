@@ -49,7 +49,7 @@ def delete_a_blog(id: int, db: Session = Depends(dependency=get_db)):
 def update(id: int, request: schemas.Blog, db: Session = Depends(dependency=get_db)):
     blog = db.query(models.Blog).filter(models.Blog.id == id)
     if not blog.first():
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Blog with the id equal to {id} doesn't exist!")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=f"Blog with the id equal to {id} doesn't exist!")
     blog.update(values={'title': request.title, 'body': request.body}, synchronize_session=False)
     db.commit()
     return f'Blog with the id equal to {id} updated.'
