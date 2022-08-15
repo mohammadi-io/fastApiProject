@@ -17,3 +17,4 @@ websockets~=10.3
 SQLAlchemy~=1.4.40
 passlib~=1.7.4
 python-jose
+gunicorn
