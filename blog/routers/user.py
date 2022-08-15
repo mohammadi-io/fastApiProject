@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
-from .authentication import pwd_context
+from .authentication import pwd_context, get_current_user
 from .. import schemas, models
 from ..database import get_db
 
@@ -24,3 +24,8 @@ def get_user(id: int, db: Session = Depends(dependency=get_db)):
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'User with id equal to {id} not found!')
     return user
+
+
+@router.get("/me/", response_model=schemas.ShowUser)
+def read_users_me(current_user: schemas.ShowUser = Depends(get_current_user)):
+    return current_user
