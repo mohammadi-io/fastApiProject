@@ -18,3 +18,4 @@ SQLAlchemy~=1.4.40
 passlib~=1.7.4
 python-jose
 gunicorn
+python-multipart
